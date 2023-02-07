@@ -1,0 +1,44 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <RootNamespace>ProductTracking.Core</RootNamespace>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Entities\AccountAggregate\**" />
+    <Compile Remove="Repositories\**" />
+    <EmbeddedResource Remove="Entities\AccountAggregate\**" />
+    <EmbeddedResource Remove="Repositories\**" />
+    <None Remove="Entities\AccountAggregate\**" />
+    <None Remove="Repositories\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Entities\TrackingAggregate\Recipt.cs~RF86d9b1b.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Ardalis.Specification" Version="6.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="5.1.0-preview2.22314.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.6" />
+    <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="6.0.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Data\" />
+    <Folder Include="DTO\Security\" />
+    <Folder Include="Entities\NewFolder\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Microsoft.Data.SqlClient">
+      <HintPath>D:\app-data\nuget\microsoft.data.sqlclient\2.1.4\ref\netcoreapp3.1\Microsoft.Data.SqlClient.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>
