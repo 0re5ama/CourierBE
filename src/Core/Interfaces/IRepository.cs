@@ -39,5 +39,6 @@ public interface IRepository<T> : IDisposable where T : class
     void Delete(T entity);
     Task<bool> AllAsync(Expression<Func<T, bool>> predicate = null, CancellationToken cancellationToken = default);
     Task<List<T>> SqlQueryAsync(string query, List<SqlParameter> parameters = null);
+    Task<string> SqlQueryScalar(string query, List<SqlParameter> parameters = null);
 
 }

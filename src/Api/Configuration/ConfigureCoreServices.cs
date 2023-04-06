@@ -31,6 +31,7 @@ public static class ConfigureCoreServices
         services.AddScoped<IRoleService, RoleService>();
         services.AddScoped<IUserService, UserService>();
         services.AddScoped<IModuleService, ModuleService>();
+        services.AddScoped<IMenuService, MenuService>();
         services.AddScoped<IOfficeService, OfficeService>();
 
         services.AddScoped<IHeaderContactDetailService, HeaderContactDetailService>();

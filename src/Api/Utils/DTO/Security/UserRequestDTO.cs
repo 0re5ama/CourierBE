@@ -11,10 +11,21 @@ public class UserRequestDTO
     public string UserName { get; set; }
     public Guid OfficeId { get; set; }
     public string Name { get; set; }
-    public string Password { get; set; }
-    public List<UserRoleRequestDTO>? Role { get; set; }
+    public bool IsSuperAdmin { get; set; }
+    public List<UserRoleRequestDTO>? Roles { get; set; }
     //public List<UserModuleFunctionRequestDTO> userModuleFunctions { get; set; } = new List<UserModuleFunctionRequestDTO>();
 
+}
+
+public class UserSaveRequestDTO : UserRequestDTO
+{
+    public string Password { get; set; }
+}
+
+
+public class UserUpdateRequestDTO : UserRequestDTO
+{
+    public string? Password { get; set; }
 }
 
 public class UserRoleRequestDTO

@@ -21,19 +21,22 @@ public class Consignment : BaseEntity
     public Package? Package { get; set; }
     public int? Quantity { get; set; }
     public string? CtnNo { get; set; }
-    public decimal? Expense { get; set; }
-    public string? CBM { get; set; }
+    public decimal? PackingFee { get; set; }
+    public decimal? Volume { get; set; }
     public decimal? Weight { get; set; }
     public decimal? Tax { get; set; }
     public decimal? Freight { get; set; }
-    public decimal? FreightPrePayment { get; set; }
-    public decimal? freightDelivery { get; set; }
+    // public decimal? FreightPrePayment { get; set; }
+    public decimal? LocalFreight { get; set; }
+    public decimal? freightDelivery => TotalAmount - Advance;
     public decimal? Advance { get; set; }
+    public decimal? BillCharge { get; set; }
     public decimal? Value { get; set; }
     public  decimal? Insurance { get; set; }
-    public string? Prepayment { get; set; }
+    // public string? Prepayment { get; set; }
+    public int? PaymentMethod { get; set; }
     public string? Payment { get; set; }
-    public decimal? TotalAmount { get; set; }
+    public decimal? TotalAmount => PackingFee + Freight + Tax + BillCharge + LocalFreight + Insurance;
     public string? TradeMode { get; set; }
     public string? Remarks { get; set; }
     public string? Signature { get; set; }

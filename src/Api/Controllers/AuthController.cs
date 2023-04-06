@@ -34,7 +34,7 @@ public class AuthController : ControllerBase
     {
         try
         {
-            var user = await _authService.AuthenticateAsync(request.Email, request.Password);
+            var user = await _authService.AuthenticateAsync(request.UserName, request.Password);
             var token = await _tokenService.GetTokenAsync(user);
             return Ok(new TokenResponse(_mapper.Map<UserDTO>(user), token, "Successfully logged in"));
         }

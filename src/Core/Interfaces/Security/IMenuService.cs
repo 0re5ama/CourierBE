@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ProductTracking.Core.DTO;
+using ProductTracking.Core.Entities.AuthAggregate;
 
 namespace ProductTracking.Core.Interfaces.Security;
 public interface IMenuService
 {
-
+    public Task<List<MenuDTO>> GetAsync();
 }

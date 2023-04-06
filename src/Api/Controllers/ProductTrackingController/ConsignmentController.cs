@@ -28,14 +28,13 @@ public class ConsignmentController : ControllerBase
     }
     #endregion
 
-
     #region saveConsignment
     [Authorize]
     [HttpPost]
     public async Task<Response<ConsignmentRequestDTO>> SaveConsignment(ConsignmentRequestDTO consignmentDTO)
     {
         var saveconsignment = await _consignmentService.SaveAsync(_mapper.Map<Consignment>(consignmentDTO));
-        return new Response<ConsignmentRequestDTO>(_mapper.Map<ConsignmentRequestDTO>(saveconsignment),true,"Consignment Sucessfully Created");
+        return new Response<ConsignmentRequestDTO>(_mapper.Map<ConsignmentRequestDTO>(saveconsignment), true, "Consignment Sucessfully Created");
     }
     #endregion
 
@@ -47,7 +46,7 @@ public class ConsignmentController : ControllerBase
         var recpt = _mapper.Map<Consignment>(consignment);
         recpt.Id = id;
         var updateconsignment = await _consignmentService.UpdateAsync(id, recpt);
-        return new Response<ConsignmentRequestDTO>(_mapper.Map<ConsignmentRequestDTO>(updateconsignment),true,"Consignment Sucessfully Updated" );
+        return new Response<ConsignmentRequestDTO>(_mapper.Map<ConsignmentRequestDTO>(updateconsignment), true, "Consignment Sucessfully Updated");
     }
     #endregion
 
@@ -66,7 +65,7 @@ public class ConsignmentController : ControllerBase
     public async Task<Response<ConsignmentResponseDTO>> DeleteConsignment(Guid id)
     {
         var consignmentrepo = await _consignmentService.DeleteAsync(id);
-        return new Response<ConsignmentResponseDTO>(_mapper.Map<ConsignmentResponseDTO>(consignmentrepo),true,"Consignment Sucessfully Deleted");
+        return new Response<ConsignmentResponseDTO>(_mapper.Map<ConsignmentResponseDTO>(consignmentrepo), true, "Consignment Sucessfully Deleted");
     }
     #endregion
 
@@ -167,9 +166,4 @@ public class ConsignmentController : ControllerBase
         return new Response<List<ConsignmentListDTO>>(_mapper.Map<List<ConsignmentListDTO>>(consignmentrepo));
     }
     #endregion
-
-
-
-
-
 }

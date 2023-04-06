@@ -41,7 +41,9 @@ public class ConsignmentService : IConsignmentService
     {
         try
         {
-            var saveconsignment = await _uow.Repository<Consignment>().InsertAsync(consignment);
+            var _repo = _uow.Repository<Consignment>();
+            var saveconsignment = await _repo.InsertAsync(consignment);
+            consignment.ConsignmentNo = await _repo.SqlQueryScalar("gen_consignment_no", null);
             await _uow.SaveChangesAsync();
             return saveconsignment;
         }
@@ -223,8 +225,9 @@ public class ConsignmentService : IConsignmentService
             .GetList<Consignment>(
                 predicate: x => x.ContainerId == null && x.CurrentLocationId == _currentUserService.UserInfo.CheckpointId,
                 null,
-                 include: x => x.Include(y => y.ConsignmentItems).ThenInclude(y => y.Item)
-               ,
+                 include: x => x.Include(y => y.ConsignmentItems)
+                    .Include(y => y.StartingStation)
+                    .Include(y => y.Destination),
                 selector: x => x
             );
             return repo;

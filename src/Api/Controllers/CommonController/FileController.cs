@@ -22,14 +22,22 @@ public class FileController : ControllerBase
     [HttpPost]
     public async Task<Response<string>> Upload(IFormFile file)
     {
-        MemoryStream stream = new MemoryStream();
-        await file.CopyToAsync(stream);
-        var ext = Path.GetExtension(file.FileName);
-        var filename = await _fileService.SaveFile(stream, _filePath, ext);
-        return new Response<string>(filename);
+        try
+        {
+            MemoryStream stream = new MemoryStream();
+            await file.CopyToAsync(stream);
+            var ext = Path.GetExtension(file.FileName);
+            var filename = await _fileService.SaveFile(stream, _filePath, ext);
+            return new Response<string>(filename);
+        }
+        catch (Exception ex)
+        {
+            return new Response<string>(ex.Message);
+        }
     }
 
     [HttpGet("{filename}")]
+    [AllowAnonymous]
     public async Task<IActionResult> Download(string filename)
     {
         // Stream stream = await {{__get_stream_based_on_id_here__}}

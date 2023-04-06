@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProductTracking.Infrastructure.Data;
 
@@ -11,9 +12,10 @@ using ProductTracking.Infrastructure.Data;
 namespace ProductTracking.Infrastructure.Migrations
 {
     [DbContext(typeof(ProductTrackingDbContext))]
-    partial class FinanceDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230219074658_Fixed_Menu_path")]
+    partial class Fixed_Menu_path
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -317,7 +319,7 @@ namespace ProductTracking.Infrastructure.Migrations
                             Active = true,
                             MUrl = "/ProductTracking",
                             MenuText = "ProductTracking",
-                            OrderNo = 5,
+                            OrderNo = 3,
                             SecApl = true,
                             ToolTip = "Product Tracking"
                         },
@@ -411,10 +413,10 @@ namespace ProductTracking.Infrastructure.Migrations
                         {
                             Id = new Guid("adab8a6c-7a06-48bd-b5eb-830be46c5d68"),
                             Active = true,
-                            MUrl = "/Security/Checkpoint",
+                            MUrl = "/ProductTracking/Checkpoint",
                             MenuText = "Checkpoints",
                             OrderNo = 9,
-                            ParentId = new Guid("78ce1776-2cee-43d8-892a-b9eabefea327"),
+                            ParentId = new Guid("5dd87968-fba4-43f5-b61d-75e705be1f9f"),
                             SecApl = true,
                             ToolTip = "Checkpoints"
                         },
@@ -580,7 +582,7 @@ namespace ProductTracking.Infrastructure.Migrations
                         new
                         {
                             Id = new Guid("b70f5399-8929-4493-bcc3-75c38721ed21"),
-                            ApplicationId = new Guid("541f2c3a-c67e-4b70-b58d-188486b7e04a"),
+                            ApplicationId = new Guid("9e936e4c-c13e-48ab-89b8-e7f72c1c658c"),
                             Description = "Checkpoints",
                             FromDate = new DateTime(2022, 8, 19, 0, 0, 0, 0, DateTimeKind.Utc),
                             MenuId = new Guid("adab8a6c-7a06-48bd-b5eb-830be46c5d68"),
@@ -1173,9 +1175,6 @@ namespace ProductTracking.Infrastructure.Migrations
                     b.Property<bool>("HasPasswordChanged")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("IsSuperAdmin")
-                        .HasColumnType("bit");
-
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
 
@@ -1443,9 +1442,6 @@ namespace ProductTracking.Infrastructure.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<decimal?>("Advance")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal?>("BillCharge")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("Consignee")
@@ -1890,13 +1886,13 @@ namespace ProductTracking.Infrastructure.Migrations
 
             modelBuilder.Entity("RoleUser", b =>
                 {
-                    b.Property<Guid>("RolesId")
+                    b.Property<Guid>("RoleId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("UsersId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("RolesId", "UsersId");
+                    b.HasKey("RoleId", "UsersId");
 
                     b.HasIndex("UsersId");
 
@@ -2419,7 +2415,7 @@ namespace ProductTracking.Infrastructure.Migrations
                 {
                     b.HasOne("ProductTracking.Core.Entities.AuthAggregate.Role", null)
                         .WithMany()
-                        .HasForeignKey("RolesId")
+                        .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

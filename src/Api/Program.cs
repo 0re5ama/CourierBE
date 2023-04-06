@@ -65,7 +65,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy(AllowedOrigins,
         policy =>
         {
-            policy.WithOrigins("https://localhost:8000")
+            policy.WithOrigins("https://adologistic.com")
                 .AllowAnyHeader()
                 .AllowAnyMethod()
                 .AllowAnyOrigin();
@@ -110,7 +110,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseCors(AllowedOrigins);
-app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:8000"));
+app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://adologistic.com"));
 
 app.UseHttpsRedirection();
 

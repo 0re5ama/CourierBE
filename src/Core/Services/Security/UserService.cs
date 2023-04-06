@@ -12,6 +12,7 @@ public class UserService : IUserService
 {
     private IUnitOfWork _uow;
     private UserManager<User> _userManager;
+    private RoleManager<User> _roleManager;
     private readonly ICurrentUserService _currentUserService;
 
     public UserService(IUnitOfWork uow, UserManager<User> userManager, ICurrentUserService currentUserService)
@@ -44,8 +45,8 @@ public class UserService : IUserService
     {
         try
         { 
-            var roles = user.Role.Select(x => x.Name).ToList();
-              user.Role.Clear();
+            var roles = user.Roles.Select(x => x.Name).ToList();
+              user.Roles.Clear();
             var result = await _userManager.CreateAsync(user, user.Password);
             //.ContinueWith((t) => _userManager.AddToRolesAsync(user, roles));
             var rolesSaved = await _userManager.AddToRolesAsync(user, roles);
@@ -64,6 +65,8 @@ public class UserService : IUserService
         var umfRepo = _uow.Repository<UserModuleFunction>();
         var ModuleRepo = _uow.Repository<Module>();
         var ApplicationRepo = _uow.Repository<Application>();
+        var roles = await _userManager.GetRolesAsync(user);
+        user.Roles = roles.Select(x => new Role() { Name = x }).ToList();
         user.UserModuleFunctions = umfRepo.GetAll(x => x.UserId == id, null, x => x.ModuleFunction).ToList();
         foreach (var modfn in user.UserModuleFunctions)
         {
@@ -125,9 +128,9 @@ public class UserService : IUserService
         var UserRepo = _uow.Repository<User>();
         var ModuleRepo = _uow.Repository<Module>();
         var ApplicationRepo = _uow.Repository<Application>();
-        user = UserRepo.GetAll(x => x.Id == id, null, x => x.Role).SingleOrDefault();
+        user = UserRepo.GetAll(x => x.Id == id, null, x => x.Roles).SingleOrDefault();
 
-        foreach (var role in user.Role)
+        foreach (var role in user.Roles)
         {
             var rmf = _uow.Repository<RoleModuleFunction>().GetAll(x => x.RoleId == role.Id).Select(x => x.ModuleFunctionId).ToList();
             foreach (var mod in rmf)
@@ -154,9 +157,9 @@ public class UserService : IUserService
             var UserRepo = _uow.Repository<User>();
             var ModuleRepo = _uow.Repository<Module>();
             var ApplicationRepo = _uow.Repository<Application>();
-            user = await UserRepo.GetAll(x => x.Id == UserId, null, x => x.Role).SingleOrDefaultAsync();
+            user = await UserRepo.GetAll(x => x.Id == UserId, null, x => x.Roles).SingleOrDefaultAsync();
 
-            foreach (var role in user.Role)
+            foreach (var role in user.Roles)
             {
                 var rmf = _uow.Repository<RoleModuleFunction>().GetAll(x => x.RoleId == role.Id).Select(x => x.ModuleFunctionId).ToListAsync();
                 foreach (var mod in await rmf)

@@ -14,8 +14,9 @@ public class UserResponseDTO
     public string Name { get; set; }
     public string UserName { get; set; }
     public string Password { get; set; }
+    public bool IsSuperAdmin { get; set; }
     public Guid OfficeId { get; set; }
-    public List<UserRoleResponseDTO> UserRole { get; set; }
+    public List<UserRoleResponseDTO> Roles { get; set; }
     public List<UserModuleFunctionResponseDTO> UserModuleFunctions { get; set; } = new List<UserModuleFunctionResponseDTO>();
 
 }
@@ -23,8 +24,10 @@ public class UserResponseDTO
 public class UserRoleResponseDTO
 {
 
-    public Guid RoleId { get; set; }
-    public user_RoleResponseDTO Role { get; set; }
+    // public Guid RoleId { get; set; }
+    // public user_RoleResponseDTO Role { get; set; }
+    public Guid Id { get; set; }
+    public string Name { get; set; }
 
 
 }

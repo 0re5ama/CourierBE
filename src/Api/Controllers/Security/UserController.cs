@@ -33,7 +33,7 @@ public class UserController : ControllerBase
 
 
     [HttpPost]
-    public async Task<Response<UserRequestDTO>> SaveUser(UserRequestDTO user)
+    public async Task<Response<UserRequestDTO>> SaveUser(UserSaveRequestDTO user) // TODO: return Response
     {
         var saveUser = await _userService.SaveAsync(_mapper.Map<User>(user));
         return new Response<UserRequestDTO>(_mapper.Map<UserRequestDTO>(saveUser),true,"User Successfully Created");
@@ -47,10 +47,10 @@ public class UserController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    public async Task<Response<UserRequestDTO>> UpdateUser(Guid id, UserRequestDTO user)
+    public async Task<Response<UserResponseDTO>> UpdateUser(Guid id, UserUpdateRequestDTO user) // TODO: return Response
     {
         var updateUser = await _userService.UpdateAsync(id, _mapper.Map<User>(user));
-        return new Response<UserRequestDTO>(_mapper.Map<UserRequestDTO>(updateUser),true,"User Successfully Updated ");
+        return new Response<UserResponseDTO>(_mapper.Map<UserResponseDTO>(updateUser),true,"User Successfully Updated ");
 
     }
 

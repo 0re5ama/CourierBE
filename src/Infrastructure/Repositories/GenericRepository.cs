@@ -187,4 +187,25 @@ public class GenericRepository<T> : IRepository<T> where T : class
             }
         }
     }
+
+    public async Task<string> SqlQueryScalar(string query, List<SqlParameter> parameters = null)
+    {
+        string obj = default(string);
+        using (var command = context.Database.GetDbConnection().CreateCommand())
+        {
+            command.CommandText = query;
+            command.CommandType = CommandType.StoredProcedure;
+
+            if (parameters?.Count() > 0)
+            {
+                for (int i = 0; i < parameters.Count(); i++)
+                {
+                    command.Parameters.Add(parameters[i]);
+                }
+            }
+            await context.Database.OpenConnectionAsync();
+            var res = await command.ExecuteScalarAsync();
+            return (string)res;
+        }
+    }
 }

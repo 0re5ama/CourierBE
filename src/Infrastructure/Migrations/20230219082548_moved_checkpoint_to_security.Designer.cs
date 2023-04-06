@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProductTracking.Infrastructure.Data;
 
@@ -11,9 +12,10 @@ using ProductTracking.Infrastructure.Data;
 namespace ProductTracking.Infrastructure.Migrations
 {
     [DbContext(typeof(ProductTrackingDbContext))]
-    partial class FinanceDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230219082548_moved_checkpoint_to_security")]
+    partial class moved_checkpoint_to_security
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -317,7 +319,7 @@ namespace ProductTracking.Infrastructure.Migrations
                             Active = true,
                             MUrl = "/ProductTracking",
                             MenuText = "ProductTracking",
-                            OrderNo = 5,
+                            OrderNo = 3,
                             SecApl = true,
                             ToolTip = "Product Tracking"
                         },
@@ -1173,9 +1175,6 @@ namespace ProductTracking.Infrastructure.Migrations
                     b.Property<bool>("HasPasswordChanged")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("IsSuperAdmin")
-                        .HasColumnType("bit");
-
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
 
@@ -1443,9 +1442,6 @@ namespace ProductTracking.Infrastructure.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<decimal?>("Advance")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal?>("BillCharge")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("Consignee")
@@ -1890,13 +1886,13 @@ namespace ProductTracking.Infrastructure.Migrations
 
             modelBuilder.Entity("RoleUser", b =>
                 {
-                    b.Property<Guid>("RolesId")
+                    b.Property<Guid>("RoleId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("UsersId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("RolesId", "UsersId");
+                    b.HasKey("RoleId", "UsersId");
 
                     b.HasIndex("UsersId");
 
@@ -2419,7 +2415,7 @@ namespace ProductTracking.Infrastructure.Migrations
                 {
                     b.HasOne("ProductTracking.Core.Entities.AuthAggregate.Role", null)
                         .WithMany()
-                        .HasForeignKey("RolesId")
+                        .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

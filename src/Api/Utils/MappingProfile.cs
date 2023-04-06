@@ -21,6 +21,8 @@ public class MappingProfile : Profile
         //CreateMap<User, UserRegisterDTO>().ReverseMap();
         CreateMap<User, UserDTO>().ReverseMap();
         CreateMap<User, UserRequestDTO>().ReverseMap();
+        CreateMap<User, UserSaveRequestDTO>().ReverseMap();
+        CreateMap<User, UserUpdateRequestDTO>().ReverseMap();
         CreateMap<User, UserResponseDTO>().ReverseMap();
         CreateMap<Role, RoleRequestDTO>().ReverseMap();
         CreateMap<Role, RoleResponseDTO>().ReverseMap();
@@ -44,6 +46,8 @@ public class MappingProfile : Profile
         CreateMap<Application, ApplicationResponseDTO>().ReverseMap();
         CreateMap<ModuleFunction, ModuleFunctionResponseDTO>().ReverseMap();
         CreateMap<Module, UserModuleResponseDTO>().ReverseMap();
+        CreateMap<Menu, MenuResponseDTO>().ReverseMap();
+        CreateMap<MenuDTO, MenuResponseDTO>().ReverseMap();
         CreateMap<Application, UserApplicationResponseDTO>().ReverseMap();
         CreateMap<User, OrganizationUserResponseDTO>().ReverseMap();
 

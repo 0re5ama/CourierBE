@@ -21,20 +21,22 @@ public class ConsignmentResponseDTO
     public Guid PackageId { get; set; }
     public PackageDTO Package { get; set; }
     public int? Quantity { get; set; }
-    public decimal? FreightPrePayment { get; set; }
+    public decimal? LocalFreight { get; set; }
     public decimal? FreightDelivery { get; set; }
-    public string CtnNo { get; set; }
-    public string? Expense { get; set; }
-    public string? CBM { get; set; }
+    public string? CtnNo { get; set; }
+    public string? PackingFee { get; set; }
+    public string? Volume { get; set; }
     public string? Weight { get; set; }
     public string? Tax { get; set; }
     public string? Freight { get; set; }
-    public string? Advance { get; set; }
-    public string? Value { get; set; }
-    public string? Insurance { get; set; }
-    public string? Prepayment { get; set; }
-    public string? Payment { get; set; }
-    public string? TotalAmount { get; set; }
+    public decimal? Advance { get; set; }
+    public decimal? BillCharge { get; set; }
+    public decimal? Value { get; set; }
+    public decimal? Insurance { get; set; }
+    public decimal? Prepayment { get; set; }
+    public decimal? Payment { get; set; }
+    public decimal? TotalAmount { get; set; }
+    public int? PaymentMethod { get; set; }
     public string? TradeMode { get; set; }
     public string? Remarks { get; set; }
     public string? Signature { get; set; }

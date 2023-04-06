@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProductTracking.Infrastructure.Data;
 
@@ -11,9 +12,10 @@ using ProductTracking.Infrastructure.Data;
 namespace ProductTracking.Infrastructure.Migrations
 {
     [DbContext(typeof(ProductTrackingDbContext))]
-    partial class FinanceDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230211194939_remove-pwd-user-tbl")]
+    partial class removepwdusertbl
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -233,10 +235,12 @@ namespace ProductTracking.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<bool>("Active")
-                        .HasColumnType("bit");
+                    b.Property<string>("HasChild")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(1)");
 
                     b.Property<string>("Icon")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("MUrl")
@@ -252,8 +256,9 @@ namespace ProductTracking.Infrastructure.Migrations
                     b.Property<Guid?>("ParentId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<bool>("SecApl")
-                        .HasColumnType("bit");
+                    b.Property<string>("SecApl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(1)");
 
                     b.Property<string>("ToolTip")
                         .IsRequired()
@@ -264,180 +269,194 @@ namespace ProductTracking.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ParentId");
-
                     b.ToTable("Menu");
 
                     b.HasData(
                         new
                         {
                             Id = new Guid("2cf6f49d-69a6-47d7-a473-58d941538bab"),
-                            Active = true,
+                            HasChild = "N",
+                            Icon = "smile",
                             MUrl = "/welcome",
                             MenuText = "Welcome",
                             OrderNo = 1,
-                            SecApl = false,
+                            SecApl = "N",
                             ToolTip = "Welcome"
                         },
                         new
                         {
                             Id = new Guid("78ce1776-2cee-43d8-892a-b9eabefea327"),
-                            Active = true,
-                            MUrl = "/Security",
+                            HasChild = "Y",
+                            Icon = "form",
                             MenuText = "Security",
                             OrderNo = 2,
-                            SecApl = true,
+                            SecApl = "Y",
                             ToolTip = "Security"
                         },
                         new
                         {
                             Id = new Guid("49b12a5a-6e12-48d2-bd86-8e83382ca4e7"),
-                            Active = true,
+                            HasChild = "Y",
+                            Icon = "form",
                             MUrl = "/Security/Users",
                             MenuText = "Users",
                             OrderNo = 1,
                             ParentId = new Guid("78ce1776-2cee-43d8-892a-b9eabefea327"),
-                            SecApl = true,
+                            SecApl = "Y",
                             ToolTip = "Users"
                         },
                         new
                         {
                             Id = new Guid("a779afac-05fa-4334-9b6b-2ede4a925cd4"),
-                            Active = true,
+                            HasChild = "Y",
+                            Icon = "form",
                             MUrl = "/Security/Role",
                             MenuText = "Role",
                             OrderNo = 2,
                             ParentId = new Guid("78ce1776-2cee-43d8-892a-b9eabefea327"),
-                            SecApl = true,
+                            SecApl = "Y",
                             ToolTip = "Role"
                         },
                         new
                         {
                             Id = new Guid("5dd87968-fba4-43f5-b61d-75e705be1f9f"),
-                            Active = true,
-                            MUrl = "/ProductTracking",
+                            HasChild = "Y",
+                            Icon = "form",
                             MenuText = "ProductTracking",
-                            OrderNo = 5,
-                            SecApl = true,
-                            ToolTip = "Product Tracking"
+                            OrderNo = 3,
+                            SecApl = "Y",
+                            ToolTip = "productTracking"
                         },
                         new
                         {
                             Id = new Guid("8a314e94-1102-4b65-a2a9-9552133cf10f"),
-                            Active = true,
+                            HasChild = "Y",
+                            Icon = "form",
                             MUrl = "/ProductTracking/AdminDashboard",
                             MenuText = "AdminDashboard",
                             OrderNo = 1,
                             ParentId = new Guid("5dd87968-fba4-43f5-b61d-75e705be1f9f"),
-                            SecApl = true,
+                            SecApl = "Y",
                             ToolTip = "Admin Dahboard"
                         },
                         new
                         {
                             Id = new Guid("8b52e051-0d8b-49ff-a515-53b2ad9a9975"),
-                            Active = true,
+                            HasChild = "Y",
+                            Icon = "form",
                             MUrl = "/ProductTracking/CheckpointUserDashboard",
                             MenuText = "CheckpointUserDashboard",
                             OrderNo = 2,
                             ParentId = new Guid("5dd87968-fba4-43f5-b61d-75e705be1f9f"),
-                            SecApl = true,
+                            SecApl = "Y",
                             ToolTip = "Checkpoint User Dashboard"
                         },
                         new
                         {
                             Id = new Guid("32508cdc-db75-437e-bcc8-6cc67e2c82b2"),
-                            Active = true,
+                            HasChild = "Y",
+                            Icon = "form",
                             MUrl = "/ProductTracking/Consignment",
-                            MenuText = "Consignmnet",
+                            MenuText = "ConsignmnetEntry",
                             OrderNo = 3,
-                            SecApl = true,
-                            ToolTip = "Consignment"
+                            ParentId = new Guid("5dd87968-fba4-43f5-b61d-75e705be1f9f"),
+                            SecApl = "Y",
+                            ToolTip = "ConsignmentEntry"
                         },
                         new
                         {
                             Id = new Guid("0365f4a8-1574-42bd-a331-4e160c6c40ed"),
-                            Active = true,
+                            HasChild = "Y",
+                            Icon = "form",
                             MUrl = "/ProductTracking/SearchConsignment",
                             MenuText = "SearchConsignment",
                             OrderNo = 4,
                             ParentId = new Guid("5dd87968-fba4-43f5-b61d-75e705be1f9f"),
-                            SecApl = true,
+                            SecApl = "Y",
                             ToolTip = "Search Consignment"
                         },
                         new
                         {
                             Id = new Guid("d0ac4225-14f7-4b4c-bc0b-ecdfc6003d75"),
-                            Active = true,
+                            HasChild = "Y",
+                            Icon = "form",
                             MUrl = "/ProductTracking/ContainerList",
                             MenuText = "ContainerList",
                             OrderNo = 5,
                             ParentId = new Guid("5dd87968-fba4-43f5-b61d-75e705be1f9f"),
-                            SecApl = true,
-                            ToolTip = "Container List"
+                            SecApl = "Y",
+                            ToolTip = "ContainerList"
                         },
                         new
                         {
                             Id = new Guid("b9019358-a9f8-4f29-b6f3-e9ca572bbab7"),
-                            Active = true,
+                            HasChild = "Y",
+                            Icon = "form",
                             MUrl = "/ProductTracking/Container",
                             MenuText = "Container",
-                            OrderNo = 4,
-                            SecApl = true,
+                            OrderNo = 6,
+                            ParentId = new Guid("5dd87968-fba4-43f5-b61d-75e705be1f9f"),
+                            SecApl = "Y",
                             ToolTip = "Container"
                         },
                         new
                         {
                             Id = new Guid("807041f5-a442-422c-94c7-0065e46c483c"),
-                            Active = false,
+                            HasChild = "Y",
+                            Icon = "form",
                             MUrl = "/ProductTracking/ItemGroup",
                             MenuText = "ItemGroup",
                             OrderNo = 7,
                             ParentId = new Guid("5dd87968-fba4-43f5-b61d-75e705be1f9f"),
-                            SecApl = true,
+                            SecApl = "Y",
                             ToolTip = "Item Group"
                         },
                         new
                         {
                             Id = new Guid("412d4976-15b3-451c-9ddd-1fda0ae45fb1"),
-                            Active = false,
+                            HasChild = "Y",
+                            Icon = "form",
                             MUrl = "/ProductTracking/ItemList",
                             MenuText = "ItemList",
                             OrderNo = 8,
                             ParentId = new Guid("5dd87968-fba4-43f5-b61d-75e705be1f9f"),
-                            SecApl = true,
+                            SecApl = "Y",
                             ToolTip = "Item List"
                         },
                         new
                         {
                             Id = new Guid("adab8a6c-7a06-48bd-b5eb-830be46c5d68"),
-                            Active = true,
-                            MUrl = "/Security/Checkpoint",
+                            HasChild = "Y",
+                            Icon = "form",
+                            MUrl = "/ProductTracking/Checkpoint",
                             MenuText = "Checkpoints",
                             OrderNo = 9,
-                            ParentId = new Guid("78ce1776-2cee-43d8-892a-b9eabefea327"),
-                            SecApl = true,
+                            ParentId = new Guid("5dd87968-fba4-43f5-b61d-75e705be1f9f"),
+                            SecApl = "Y",
                             ToolTip = "Checkpoints"
                         },
                         new
                         {
                             Id = new Guid("05a9b8bd-e08b-4493-b7fd-f47602b63ca8"),
-                            Active = true,
+                            HasChild = "Y",
+                            Icon = "form",
                             MUrl = "/ProductTracking/Package",
                             MenuText = "Package",
                             OrderNo = 10,
                             ParentId = new Guid("5dd87968-fba4-43f5-b61d-75e705be1f9f"),
-                            SecApl = true,
+                            SecApl = "Y",
                             ToolTip = "Package"
                         },
                         new
                         {
                             Id = new Guid("400f7539-aa3e-459c-9159-154759fd5e12"),
-                            Active = true,
+                            HasChild = "Y",
+                            Icon = "form",
                             MUrl = "/ProductTracking/Payment",
                             MenuText = "Payment",
                             OrderNo = 11,
                             ParentId = new Guid("5dd87968-fba4-43f5-b61d-75e705be1f9f"),
-                            SecApl = true,
+                            SecApl = "Y",
                             ToolTip = "Payment"
                         });
                 });
@@ -518,7 +537,7 @@ namespace ProductTracking.Infrastructure.Migrations
                         {
                             Id = new Guid("d6ab380b-8a6d-4def-86b7-d28cbe3e734c"),
                             ApplicationId = new Guid("9e936e4c-c13e-48ab-89b8-e7f72c1c658c"),
-                            Description = "Container List",
+                            Description = "ContainerList",
                             FromDate = new DateTime(2022, 8, 19, 0, 0, 0, 0, DateTimeKind.Utc),
                             MenuId = new Guid("d0ac4225-14f7-4b4c-bc0b-ecdfc6003d75"),
                             Name = "ContainerList "
@@ -545,7 +564,7 @@ namespace ProductTracking.Infrastructure.Migrations
                         {
                             Id = new Guid("ed0ddce0-b06b-4915-aa79-bde61ac1a22f"),
                             ApplicationId = new Guid("9e936e4c-c13e-48ab-89b8-e7f72c1c658c"),
-                            Description = "Search Consignment",
+                            Description = "SearchConsignment",
                             FromDate = new DateTime(2022, 8, 19, 0, 0, 0, 0, DateTimeKind.Utc),
                             MenuId = new Guid("0365f4a8-1574-42bd-a331-4e160c6c40ed"),
                             Name = "SearchConsignment"
@@ -554,7 +573,7 @@ namespace ProductTracking.Infrastructure.Migrations
                         {
                             Id = new Guid("2776fcc6-9152-44dc-9eb3-09feb06f1e03"),
                             ApplicationId = new Guid("9e936e4c-c13e-48ab-89b8-e7f72c1c658c"),
-                            Description = "Admin Dashboard",
+                            Description = "AdminDashboard",
                             FromDate = new DateTime(2022, 8, 19, 0, 0, 0, 0, DateTimeKind.Utc),
                             MenuId = new Guid("8a314e94-1102-4b65-a2a9-9552133cf10f"),
                             Name = "Admin Dashboard"
@@ -580,7 +599,7 @@ namespace ProductTracking.Infrastructure.Migrations
                         new
                         {
                             Id = new Guid("b70f5399-8929-4493-bcc3-75c38721ed21"),
-                            ApplicationId = new Guid("541f2c3a-c67e-4b70-b58d-188486b7e04a"),
+                            ApplicationId = new Guid("9e936e4c-c13e-48ab-89b8-e7f72c1c658c"),
                             Description = "Checkpoints",
                             FromDate = new DateTime(2022, 8, 19, 0, 0, 0, 0, DateTimeKind.Utc),
                             MenuId = new Guid("adab8a6c-7a06-48bd-b5eb-830be46c5d68"),
@@ -590,7 +609,7 @@ namespace ProductTracking.Infrastructure.Migrations
                         {
                             Id = new Guid("e0818357-af77-4a05-9879-3aeb0749ae0f"),
                             ApplicationId = new Guid("9e936e4c-c13e-48ab-89b8-e7f72c1c658c"),
-                            Description = "Item Groups",
+                            Description = "ItemGroups",
                             FromDate = new DateTime(2022, 8, 19, 0, 0, 0, 0, DateTimeKind.Utc),
                             MenuId = new Guid("807041f5-a442-422c-94c7-0065e46c483c"),
                             Name = "ItemGroups"
@@ -1173,9 +1192,6 @@ namespace ProductTracking.Infrastructure.Migrations
                     b.Property<bool>("HasPasswordChanged")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("IsSuperAdmin")
-                        .HasColumnType("bit");
-
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
 
@@ -1445,8 +1461,8 @@ namespace ProductTracking.Infrastructure.Migrations
                     b.Property<decimal?>("Advance")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<decimal?>("BillCharge")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<string>("CBM")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Consignee")
                         .IsRequired()
@@ -1484,20 +1500,20 @@ namespace ProductTracking.Infrastructure.Migrations
                     b.Property<DateTime>("EntryDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<decimal?>("Expense")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<decimal?>("Freight")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal?>("FreightPrePayment")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal?>("Insurance")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<decimal?>("LocalFreight")
-                        .HasColumnType("decimal(18,2)");
-
                     b.Property<Guid?>("PackageId")
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<decimal?>("PackingFee")
-                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("Payment")
                         .HasColumnType("nvarchar(max)");
@@ -1508,11 +1524,11 @@ namespace ProductTracking.Infrastructure.Migrations
                     b.Property<DateTime?>("PaymentDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("PaymentMethod")
-                        .HasColumnType("int");
-
                     b.Property<int?>("PaymentStatus")
                         .HasColumnType("int");
+
+                    b.Property<string>("Prepayment")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("Quantity")
                         .HasColumnType("int");
@@ -1536,6 +1552,9 @@ namespace ProductTracking.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<decimal?>("TotalAmount")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<string>("TradeMode")
                         .HasColumnType("nvarchar(max)");
 
@@ -1548,10 +1567,10 @@ namespace ProductTracking.Infrastructure.Migrations
                     b.Property<decimal?>("Value")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<decimal?>("Volume")
+                    b.Property<decimal?>("Weight")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<decimal?>("Weight")
+                    b.Property<decimal?>("freightDelivery")
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
@@ -1588,12 +1607,8 @@ namespace ProductTracking.Infrastructure.Migrations
                     b.Property<DateTime>("EntryDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid?>("ItemId")
+                    b.Property<Guid>("ItemId")
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("ItemName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Photo")
                         .HasColumnType("nvarchar(max)");
@@ -1890,13 +1905,13 @@ namespace ProductTracking.Infrastructure.Migrations
 
             modelBuilder.Entity("RoleUser", b =>
                 {
-                    b.Property<Guid>("RolesId")
+                    b.Property<Guid>("RoleId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("UsersId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("RolesId", "UsersId");
+                    b.HasKey("RoleId", "UsersId");
 
                     b.HasIndex("UsersId");
 
@@ -1991,15 +2006,6 @@ namespace ProductTracking.Infrastructure.Migrations
                         .HasForeignKey("UserId");
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("ProductTracking.Core.Entities.AuthAggregate.Menu", b =>
-                {
-                    b.HasOne("ProductTracking.Core.Entities.AuthAggregate.Menu", "Parent")
-                        .WithMany()
-                        .HasForeignKey("ParentId");
-
-                    b.Navigation("Parent");
                 });
 
             modelBuilder.Entity("ProductTracking.Core.Entities.AuthAggregate.Module", b =>
@@ -2256,7 +2262,9 @@ namespace ProductTracking.Infrastructure.Migrations
 
                     b.HasOne("ProductTracking.Core.Entities.TrackingAggregate.Item", "Item")
                         .WithMany()
-                        .HasForeignKey("ItemId");
+                        .HasForeignKey("ItemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("ProductTracking.Core.Entities.AuthAggregate.User", "UpdatedBy")
                         .WithMany()
@@ -2419,7 +2427,7 @@ namespace ProductTracking.Infrastructure.Migrations
                 {
                     b.HasOne("ProductTracking.Core.Entities.AuthAggregate.Role", null)
                         .WithMany()
-                        .HasForeignKey("RolesId")
+                        .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

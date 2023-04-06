@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProductTracking.Infrastructure.Data;
 
@@ -11,9 +12,10 @@ using ProductTracking.Infrastructure.Data;
 namespace ProductTracking.Infrastructure.Migrations
 {
     [DbContext(typeof(ProductTrackingDbContext))]
-    partial class FinanceDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230218200008_menu_table_changed")]
+    partial class menu_table_changed
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -237,6 +239,7 @@ namespace ProductTracking.Infrastructure.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Icon")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("MUrl")
@@ -273,6 +276,7 @@ namespace ProductTracking.Infrastructure.Migrations
                         {
                             Id = new Guid("2cf6f49d-69a6-47d7-a473-58d941538bab"),
                             Active = true,
+                            Icon = "smile",
                             MUrl = "/welcome",
                             MenuText = "Welcome",
                             OrderNo = 1,
@@ -283,7 +287,7 @@ namespace ProductTracking.Infrastructure.Migrations
                         {
                             Id = new Guid("78ce1776-2cee-43d8-892a-b9eabefea327"),
                             Active = true,
-                            MUrl = "/Security",
+                            Icon = "form",
                             MenuText = "Security",
                             OrderNo = 2,
                             SecApl = true,
@@ -293,6 +297,7 @@ namespace ProductTracking.Infrastructure.Migrations
                         {
                             Id = new Guid("49b12a5a-6e12-48d2-bd86-8e83382ca4e7"),
                             Active = true,
+                            Icon = "form",
                             MUrl = "/Security/Users",
                             MenuText = "Users",
                             OrderNo = 1,
@@ -304,6 +309,7 @@ namespace ProductTracking.Infrastructure.Migrations
                         {
                             Id = new Guid("a779afac-05fa-4334-9b6b-2ede4a925cd4"),
                             Active = true,
+                            Icon = "form",
                             MUrl = "/Security/Role",
                             MenuText = "Role",
                             OrderNo = 2,
@@ -315,9 +321,9 @@ namespace ProductTracking.Infrastructure.Migrations
                         {
                             Id = new Guid("5dd87968-fba4-43f5-b61d-75e705be1f9f"),
                             Active = true,
-                            MUrl = "/ProductTracking",
+                            Icon = "form",
                             MenuText = "ProductTracking",
-                            OrderNo = 5,
+                            OrderNo = 3,
                             SecApl = true,
                             ToolTip = "Product Tracking"
                         },
@@ -325,6 +331,7 @@ namespace ProductTracking.Infrastructure.Migrations
                         {
                             Id = new Guid("8a314e94-1102-4b65-a2a9-9552133cf10f"),
                             Active = true,
+                            Icon = "form",
                             MUrl = "/ProductTracking/AdminDashboard",
                             MenuText = "AdminDashboard",
                             OrderNo = 1,
@@ -336,6 +343,7 @@ namespace ProductTracking.Infrastructure.Migrations
                         {
                             Id = new Guid("8b52e051-0d8b-49ff-a515-53b2ad9a9975"),
                             Active = true,
+                            Icon = "form",
                             MUrl = "/ProductTracking/CheckpointUserDashboard",
                             MenuText = "CheckpointUserDashboard",
                             OrderNo = 2,
@@ -347,8 +355,9 @@ namespace ProductTracking.Infrastructure.Migrations
                         {
                             Id = new Guid("32508cdc-db75-437e-bcc8-6cc67e2c82b2"),
                             Active = true,
+                            Icon = "form",
                             MUrl = "/ProductTracking/Consignment",
-                            MenuText = "Consignmnet",
+                            MenuText = "ConsignmnetEntry",
                             OrderNo = 3,
                             SecApl = true,
                             ToolTip = "Consignment"
@@ -357,6 +366,7 @@ namespace ProductTracking.Infrastructure.Migrations
                         {
                             Id = new Guid("0365f4a8-1574-42bd-a331-4e160c6c40ed"),
                             Active = true,
+                            Icon = "form",
                             MUrl = "/ProductTracking/SearchConsignment",
                             MenuText = "SearchConsignment",
                             OrderNo = 4,
@@ -368,6 +378,7 @@ namespace ProductTracking.Infrastructure.Migrations
                         {
                             Id = new Guid("d0ac4225-14f7-4b4c-bc0b-ecdfc6003d75"),
                             Active = true,
+                            Icon = "form",
                             MUrl = "/ProductTracking/ContainerList",
                             MenuText = "ContainerList",
                             OrderNo = 5,
@@ -379,9 +390,10 @@ namespace ProductTracking.Infrastructure.Migrations
                         {
                             Id = new Guid("b9019358-a9f8-4f29-b6f3-e9ca572bbab7"),
                             Active = true,
+                            Icon = "form",
                             MUrl = "/ProductTracking/Container",
                             MenuText = "Container",
-                            OrderNo = 4,
+                            OrderNo = 6,
                             SecApl = true,
                             ToolTip = "Container"
                         },
@@ -389,6 +401,7 @@ namespace ProductTracking.Infrastructure.Migrations
                         {
                             Id = new Guid("807041f5-a442-422c-94c7-0065e46c483c"),
                             Active = false,
+                            Icon = "form",
                             MUrl = "/ProductTracking/ItemGroup",
                             MenuText = "ItemGroup",
                             OrderNo = 7,
@@ -400,6 +413,7 @@ namespace ProductTracking.Infrastructure.Migrations
                         {
                             Id = new Guid("412d4976-15b3-451c-9ddd-1fda0ae45fb1"),
                             Active = false,
+                            Icon = "form",
                             MUrl = "/ProductTracking/ItemList",
                             MenuText = "ItemList",
                             OrderNo = 8,
@@ -411,10 +425,11 @@ namespace ProductTracking.Infrastructure.Migrations
                         {
                             Id = new Guid("adab8a6c-7a06-48bd-b5eb-830be46c5d68"),
                             Active = true,
-                            MUrl = "/Security/Checkpoint",
+                            Icon = "form",
+                            MUrl = "/ProductTracking/Checkpoint",
                             MenuText = "Checkpoints",
                             OrderNo = 9,
-                            ParentId = new Guid("78ce1776-2cee-43d8-892a-b9eabefea327"),
+                            ParentId = new Guid("5dd87968-fba4-43f5-b61d-75e705be1f9f"),
                             SecApl = true,
                             ToolTip = "Checkpoints"
                         },
@@ -422,6 +437,7 @@ namespace ProductTracking.Infrastructure.Migrations
                         {
                             Id = new Guid("05a9b8bd-e08b-4493-b7fd-f47602b63ca8"),
                             Active = true,
+                            Icon = "form",
                             MUrl = "/ProductTracking/Package",
                             MenuText = "Package",
                             OrderNo = 10,
@@ -433,6 +449,7 @@ namespace ProductTracking.Infrastructure.Migrations
                         {
                             Id = new Guid("400f7539-aa3e-459c-9159-154759fd5e12"),
                             Active = true,
+                            Icon = "form",
                             MUrl = "/ProductTracking/Payment",
                             MenuText = "Payment",
                             OrderNo = 11,
@@ -580,7 +597,7 @@ namespace ProductTracking.Infrastructure.Migrations
                         new
                         {
                             Id = new Guid("b70f5399-8929-4493-bcc3-75c38721ed21"),
-                            ApplicationId = new Guid("541f2c3a-c67e-4b70-b58d-188486b7e04a"),
+                            ApplicationId = new Guid("9e936e4c-c13e-48ab-89b8-e7f72c1c658c"),
                             Description = "Checkpoints",
                             FromDate = new DateTime(2022, 8, 19, 0, 0, 0, 0, DateTimeKind.Utc),
                             MenuId = new Guid("adab8a6c-7a06-48bd-b5eb-830be46c5d68"),
@@ -1173,9 +1190,6 @@ namespace ProductTracking.Infrastructure.Migrations
                     b.Property<bool>("HasPasswordChanged")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("IsSuperAdmin")
-                        .HasColumnType("bit");
-
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
 
@@ -1443,9 +1457,6 @@ namespace ProductTracking.Infrastructure.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<decimal?>("Advance")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal?>("BillCharge")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("Consignee")
@@ -1890,13 +1901,13 @@ namespace ProductTracking.Infrastructure.Migrations
 
             modelBuilder.Entity("RoleUser", b =>
                 {
-                    b.Property<Guid>("RolesId")
+                    b.Property<Guid>("RoleId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("UsersId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("RolesId", "UsersId");
+                    b.HasKey("RoleId", "UsersId");
 
                     b.HasIndex("UsersId");
 
@@ -2419,7 +2430,7 @@ namespace ProductTracking.Infrastructure.Migrations
                 {
                     b.HasOne("ProductTracking.Core.Entities.AuthAggregate.Role", null)
                         .WithMany()
-                        .HasForeignKey("RolesId")
+                        .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

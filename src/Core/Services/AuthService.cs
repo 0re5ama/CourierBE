@@ -17,12 +17,12 @@ public class AuthService : IAuthService
         _signInManager = signInManager;
     }
 
-    public async Task<User> AuthenticateAsync(string Email, string Password)
+    public async Task<User> AuthenticateAsync(string UserName, string Password)
     {
         try
         {
-            var user = await _userManager.FindByEmailAsync(Email);
-            var result = await _signInManager.PasswordSignInAsync(Email, Password, false, lockoutOnFailure: false);
+            var user = await _userManager.FindByNameAsync(UserName);
+            var result = await _signInManager.PasswordSignInAsync(UserName, Password, false, lockoutOnFailure: false);
             if (!result.Succeeded)
             {
                 throw new InvalidLoginException();

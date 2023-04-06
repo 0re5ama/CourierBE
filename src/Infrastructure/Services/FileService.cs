@@ -12,15 +12,22 @@ public class FileService : IFileService
 
     public async Task<string> SaveFile(MemoryStream stream, string filepath, string ext)
     {
-        Directory.CreateDirectory(filepath);
-        string filename = Guid.NewGuid().ToString() + ext;
-        var path = Path.Combine(filepath, filename);
-        stream.Position = 0;
-        using (var fs = new FileStream(path, FileMode.Create))
+        try
         {
-            await stream.CopyToAsync(fs);
+            Directory.CreateDirectory(filepath);
+            string filename = Guid.NewGuid().ToString() + ext;
+            var path = Path.Combine(filepath, filename);
+            stream.Position = 0;
+            using (var fs = new FileStream(path, FileMode.Create))
+            {
+                await stream.CopyToAsync(fs);
+            }
+            return filename;
         }
-        return filename;
+        catch (Exception ex)
+        {
+            throw ex;
+        }
     }
 
     public async Task<FileStreamInfo> GetFile(string filename, string filepath)

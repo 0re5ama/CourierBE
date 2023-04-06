@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,7 +14,19 @@ public class Menu
     {
     }
 
-    public Menu(string id, string menuText, string toolTip, string? usedIn, int orderNo, string? mUrl, string parentId, char hasChild, char secApl, string icon)
+    public Menu(
+        string id, 
+        string menuText, 
+        string toolTip, 
+        string? usedIn, 
+        int orderNo, 
+        string? mUrl, 
+        string parentId,
+        // char hasChild,
+        bool secApl, 
+        string? icon, 
+        bool active = true
+    )
     {
         Id = Guid.Parse(id);
         MenuText = menuText;
@@ -22,9 +35,10 @@ public class Menu
         OrderNo = orderNo;
         MUrl = mUrl;
         ParentId = string.IsNullOrEmpty(parentId) == true ? null : Guid.Parse(parentId);
-        HasChild = hasChild;
+        // HasChild = hasChild;
         SecApl = secApl;
         Icon = icon;
+        Active = active;
     }
 
     public Guid Id { get; set; }
@@ -34,7 +48,11 @@ public class Menu
     public int OrderNo { get; set; }
     public string? MUrl { get; set; }
     public Guid? ParentId { get; set; }
-    public char HasChild { get; set; }
-    public char SecApl { get; set; }
-    public string Icon { get; set; }
+    public Menu? Parent { get; set; }
+    // public char HasChild { get; set; }
+    public bool SecApl { get; set; }
+    public string? Icon { get; set; }
+    public bool Active { get; set; } = true;
+    [NotMapped]
+    public List<Menu>? Children { get; set; } 
 }

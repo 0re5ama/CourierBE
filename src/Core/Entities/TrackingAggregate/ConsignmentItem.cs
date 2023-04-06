@@ -9,8 +9,9 @@ public class ConsignmentItem:BaseEntity
 {
     public Guid? ConsignmentId { get; set; }
     public Consignment? Consignment { get; set; }
-    public Guid ItemId { get; set; }
-    public Item Item { get; set; }
+    public Guid? ItemId { get; set; }
+    public Item? Item { get; set; }
+    public string ItemName { get; set; }
     public int Quantity { get; set; }
     public string? Photo { get; set; }
     public string? Remarks { get; set; }

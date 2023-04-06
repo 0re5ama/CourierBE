@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Identity;
 using ProductTracking.Core.Entities.Settings;
 using ProductTracking.Core.Entities.TrackingAggregate;
 using ProductTracking.Core.Enums;
@@ -12,6 +13,7 @@ public class User : IdentityUser<Guid>, IAggregateRoot
     public string? UserId { get; set; }
     public string? Name { get; set; }
     public string? Contact { get; set; }
+    [NotMapped]
     public string? Password { get; set; }
     public int? AuthorizationNo { get; set; }
     public string? AuthorizedBy { get; set; }
@@ -23,10 +25,11 @@ public class User : IdentityUser<Guid>, IAggregateRoot
     public EnStatus Status { get; set; }
     public Guid? CheckpointId { get; set; }
     public Checkpoint? Checkpoint { get; set; }
+    public bool IsSuperAdmin { get; set; }
     public List<UserModuleFunction> UserModuleFunctions { get; set; }
     public Guid OfficeId { get; set; } = Guid.Parse("187cda14-9844-42e7-99ba-b8d4f0d59c3a");
     public Office Office { get; set; }
-    public List<Role>? Role { get; set; }
+    public List<Role>? Roles { get; set; }
 
     public User(string id, string userName, string email, string name, string officeId,DateTime entryDate)
     {
